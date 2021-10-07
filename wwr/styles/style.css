@@ -1,0 +1,33 @@
+body
+{
+    background-color:purple;
+    
+
+}
+section 
+{ 
+    background-color:blue;
+    text-indent: 2%;
+    font-size: 25px;
+}
+h1
+{
+    font-style: italic;
+    font-weight: bold;
+    
+
+    /*animation-timing-function: ease-in;   */
+}
+
+.latin
+{
+    color:#C489F9;
+    text-align: center;
+    padding: 100px;
+    background-color: darkkhaki;
+    border: 2px solid black
+}
+footer
+{
+    background-image: url()
+}
