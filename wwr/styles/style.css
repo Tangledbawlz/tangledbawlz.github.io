@@ -42,7 +42,7 @@ nav
 }
 .book:hover, .join:hover
 {
-    /* background-color: ghostwhite; */
+    background-color: ghostwhite;
 }
 
 a
