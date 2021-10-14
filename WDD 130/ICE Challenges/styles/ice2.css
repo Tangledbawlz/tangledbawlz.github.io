@@ -1,0 +1,31 @@
+body
+{
+    background-color: gray;
+}
+header
+{
+    text-align: center;
+    width: 100%;
+    overflow: hidden;
+    
+}
+header img
+{
+    width: 2000px;
+    height: 600px;
+}
+main
+{
+    
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: 30px 100px auto;
+    text-align: center;
+   
+}
+main img
+{
+    border-radius: 50%;
+    border: 20px rgb(68, 68, 68) solid;
+    
+}
