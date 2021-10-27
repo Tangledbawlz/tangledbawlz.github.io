@@ -1,0 +1,44 @@
+header
+{
+    background-color: black;
+    padding: 10px;
+}
+h1
+{
+    font-size: 50px;
+    font-size: bold solid black;
+    text-align: center;
+}
+h2
+{
+    font-size: 28px;
+}
+body
+{
+    background-color: black;
+}
+main
+{ 
+    background-color: white;
+    border-radius: 50px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr 1fr;
+}
+section h1, h2
+{
+    grid-column: 2/-1;
+    
+}
+
+h1, h2, h3
+{
+    
+    
+}
+.SUBSCRIBE:hover
+{
+    color: black;
+    padding: orange 5px;
+    
+}
