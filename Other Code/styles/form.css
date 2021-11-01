@@ -1,21 +1,20 @@
 header h1
 {
+    border: 10px solid blueviolet;
     font-size: 30px;
     font-weight: bold solid black;
-
+    text-align: center;
 }
-header h2
+#cesear
 {
-
     
-}
-
-body
-{
-
 
 }
-body main
+#givenpass
 {
-
+    display: none;
+}
+#vigenere
+{
+    display: none;
 }
