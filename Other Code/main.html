@@ -10,13 +10,29 @@
 <body>
     <header>
         <h1>Encryption Tool</h1>
-        <h2>What Encryption would you like to use?</h2>
+        <h2>What Ecryption would you like to use?</h2>
     </header>
+   <select name= "ciphers" id="ciphers">
+    <option value="default"> </option>
+    <option value="Cesear Cipher">Cesear Cipher</option>
+    <option value="Password Cipher">Password Cipher</option>
+    <option value="Vigenere Cipher">Vigenere Cipher</option>
+    </select>
+    
 
-<input type="text" ="" id="">
-    <main>
-        Your Encrypted text is: 
-    </main>
-<script src = "main.js"></script>
+<div id = "cesear">
+    <h4>Type in your password into the box</h3>
+        <input id = "pass"type="password" placeholder="Password">
+        <input type = "number" name = "phase" id = "phase">
+        <input type = "number" name = "" id = "vigenere">
+   </div>
+<div id = "givenpass">
+    
+
+</div>
+
+
+    <main>Your Encrypted text is: <span id = "Encrypted"></span></main>
+    <script src="main.js"></script>
 </body>
 </html>
