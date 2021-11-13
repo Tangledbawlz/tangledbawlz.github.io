@@ -149,6 +149,10 @@ section h2 {
     background-color: #d9c2a3;
     height: 725px;
 }
+img.rivers_img
+{
+    width: 100%;
+}
 .mountains {
     grid-column: 2/7;
     grid-row: 8/13;
