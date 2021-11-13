@@ -23,6 +23,10 @@ header img
 }
 #logo_link
 {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    justify-self: center;
+    align-self: center;
     padding-top: 5px;
 
 }
@@ -42,7 +46,8 @@ nav a
 }
 nav a:hover
 {
-    background-color:lightyellow;
+    color: white;
+    background-color:black;
     text-align: center;
     text-decoration: none;
 }
@@ -144,7 +149,6 @@ h2
 {
     background-color: tan;
     height:725px;
-    
 }
 .card-img, .mountains {
     width: 100%;
@@ -153,7 +157,7 @@ h2
     height: 100%;
 
 }
-    
+
 .card-img {
     border: 10px solid #d9c2a3;
     transition: transform .5s;
@@ -207,11 +211,12 @@ body
     border-radius: 100px;
     padding: 5px tan;
 }
-footer
-{
+footer {
     background-color: orange;
-    padding: 25px 50px;
     margin-top: 200px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 25px 50px;
 }
 footer .social img
 {
@@ -223,8 +228,13 @@ footer h3 a:hover
     text-decoration: underline;
     
 }
+.social {
+    justify-self: end;
+    align-items: center;
+}
 
-@media screen and (max-width: 900px) {
+
+/* @media screen and (max-width: 900px) {
     #hero, .home-grid {
         display: block;
         height: auto;
@@ -264,4 +274,4 @@ footer h3 a:hover
     footer {
         margin-top: 25px;
     }
-}
+} */
