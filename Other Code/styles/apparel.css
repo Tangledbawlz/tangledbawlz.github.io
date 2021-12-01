@@ -1,0 +1,22 @@
+.main-grid
+{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr 1fr;
+    margin: 0 15em;
+}
+.grid-item
+{
+    align-content: center;
+    border: 2px solid black;
+
+}
+.grid-item img
+{
+    border-bottom: 2px solid black;
+    width: 100%;
+}
+.grid-item p
+{
+    margin: .1em;
+}
