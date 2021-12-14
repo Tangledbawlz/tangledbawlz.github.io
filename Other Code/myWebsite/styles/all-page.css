@@ -31,6 +31,14 @@ header div, footer div
 {
     display: inline-block;
 }
+
+#myCar
+{
+    padding-left: 10%;
+    padding-right: 10%;
+    width: 80%;
+    height: 400px;
+}
 .logo
 {
     display: inline-block;
@@ -75,6 +83,24 @@ nav
     text-decoration: none;
     padding: 25px;
 }
+.home-grid
+{
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: 1fr;
+}
+
+.Sweaters, .Long-Sleeves, .T-Shirts
+{
+    width: 250px;
+    grid-row: 1;
+    
+}
+body
+{
+    background-color: #E2C74066
+}
+
 footer
 {
     display: flex;
