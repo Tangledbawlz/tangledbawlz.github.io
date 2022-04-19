@@ -1,0 +1,10 @@
+ h1
+{
+    font-size: 40px;
+    grid-column: 4/6;
+    text-align: center;
+}
+.grid-item
+{
+    grid-row: 2;
+} 
