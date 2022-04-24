@@ -5,7 +5,7 @@ This is the first project each person should participate in when programming in 
 
 This is my example of the "Hello World" in Python, as well as adding a video to demonstrate my understanding of this project!
 
-[Software Demo Video](http://youtube.link.goes.here)
+[Software Demo Video](https://youtu.be/EMN48dgFtFA)
 
 # Development Environment
 
