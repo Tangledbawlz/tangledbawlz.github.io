@@ -238,7 +238,7 @@ def main():
     turtle251 = CSE251Turtle()
 
     # Test 1 - Drawing with no threads
-    #run_no_threads(turtle251, log, main_turtle)
+    run_no_threads(turtle251, log, main_turtle)
     
     main_turtle.clear()
 
