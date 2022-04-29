@@ -22,41 +22,26 @@ import requests
 # make the API call to request data from the website
 lock = threading.Lock()
 filename = "https://deckofcardsapi.com/"
-count = 0
+
 
 class Request_thread(threading.Thread):
     # TODO - Add code to make an API call and return the results
     # https://realpython.com/python-requests/
     # All calls through the internet sgould be called through a thread
 
+    #Borrowed this portion from the solution VVVVVVVVVVV
     def __init__(self, url):
-        pass#create these
-
+        threading.Thread.__init__(self)
+        self.url = url
+        self.response = {}
 
     def run(self):
-        pass#create these
-
-
-     
-   
-
-    def thread_func(filename, count):
-        # acquire the lock before entering the critical section
-        # If another thread has the lock, this thread will wait
-        # until it's released.
-        global lock
-        lock.acquire()
-    
-        # Do your stuff.  Only 1 thread is running this code
-        f = open(filename, 'w')
-        f.write(count)
-        f.close()
-
-        # release the lock.  If you fail to release the lock,
-        # the next thread that tried to acquire the lock will
-        # wait forever since the release will never happen.
-        lock.release()
-
+        response = requests.get(self.url)
+        if response.status_code == 200:
+            self.response = response.json()
+        else:
+            print('RESPONSE = ', response.status_code)
+    #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 class Deck:
 
@@ -69,19 +54,32 @@ class Deck:
     def reshuffle(self):
     # TODO - add call to reshuffle
     #make a call to the website, and if the object is not empty, continue
-        pass#request start and join thread
+    #request start and join thread
+        request = Request_thread(f"http://deckofcardsapi.com/api/deck/p7mrwcc6rb03/shuffle/")
+        request.start()
+        request.join()
+
 
 
     def draw_card(self):
         # TODO add call to get a card
-        #thread_func(filename, count)
         #request, then start, and join,
-        #if response is not {} request remaining and return request response
+        #if response is not {} request remaining and return request.response
+        request = Request_thread()
+        request.start()
+        request.join()
+
+        #request.response is making a request to a URL
+        if request.response != {}:
+            self.remaining = request.response
+            return request.response
+        else:
+            return ' '
         
-        
-        
-        
-        pass
+    # def new_deck(self):
+    #     request = Request_thread(f"http://deckofcardsapi.com/api/p7mrwcc6rb03/new/")
+    #     reshuffle = reshuffle(self)
+    #     self.remaining = reshuffle
 
     def cards_remaining(self):
         return self.remaining
