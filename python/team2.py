@@ -71,8 +71,8 @@ class Deck:
 
         #request.response is making a request to a URL
         if request.response != {}:
-            self.remaining = request.response
-            return request.response
+            self.remaining = request.response['remaining']
+            return request.response['cards'][0]['code']
         else:
             return ' '
         
