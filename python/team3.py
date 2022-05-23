@@ -135,6 +135,8 @@ class Board():
                 return False
         return True
 
+    mp.Manager()
+
     def find_word(self, word):
         """ Find a word in the board """
         print(f'Finding {word}...')
