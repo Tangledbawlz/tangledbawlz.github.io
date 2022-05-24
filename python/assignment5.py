@@ -121,7 +121,7 @@ class Dealer(threading.Thread):
 
 
 
-def run_production(factory_count, dealer_count):
+def run_production(factory_count, dealer_count, log):
     """ This function will do a production run with the number of
         factories and dealerships passed in as arguments.
     """
