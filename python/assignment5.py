@@ -89,12 +89,12 @@ class Factory(threading.Thread, Car):
 
     def run(self):
         # TODO produce the cars, then send them to the dealerships
-        
+        self.display()
 
         # TODO wait until all of the factories are finished producing cars
-            while True:
-                if(Factory.__sizeof__ != -1):
-                 pass
+        while True:
+            if(Factory.__sizeof__ != -1):
+                pass
 
             
 
