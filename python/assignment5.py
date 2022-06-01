@@ -80,7 +80,7 @@ class Queue251():
         return self.items.pop(0)
 
 
-class Factory(threading.Thread, Car):
+class Factory(threading.Thread):
     """ This is a factory.  It will create cars and place them on the car queue """
 
     def __init__(self):
@@ -89,27 +89,26 @@ class Factory(threading.Thread, Car):
 
     def run(self):
         # TODO produce the cars, then send them to the dealerships
-        self.display()
+        
 
         # TODO wait until all of the factories are finished producing cars
-        while True:
-            if(Factory.__sizeof__ != -1):
-                pass
+        for x in range(self.cars_to_produce):
+            car = Car()
+
 
             
 
         # TODO "Wake up/signal" the dealerships one more time.  Select one factory to do this
-                multiprocessing.Manager().list().append(Dealer)
-                pass
+                
 
 
-
-class Dealer(threading.Thread, Car):
+class Dealer(threading.Thread):
     """ This is a dealer that receives cars """
 
-    def __init__(self):
+    def __init__(self, q, car):
         self.display()
-        
+        self.q = q
+        self.car = car
 
     def run(self):
         while True:
@@ -147,13 +146,13 @@ def run_production(factory_count, dealer_count):
     factory_stats = list([0] * factory_count)
 
     # This is used to provide the car_max_queue
-    car_queue = list([0] * MAX_QUEUE_SIZE)
+    # car_queue = list([0] * MAX_QUEUE_SIZE)
 
     # TODO create your factories, each factory will create CARS_TO_CREATE_PER_FACTORY
-    factories = [multiprocessing.Process(target=Dealer(), args=()) for i in range(dealer_count)]
+    factory = multiprocessing.Process(target=Dealer(), args=())
 
     # TODO create your dealerships
-    dealers = [multiprocessing.Process(target=Factory(), args=()) for i in range(factory_count)]
+    dealers = multiprocessing.Process(target=Factory(), args=())
 
 
 
