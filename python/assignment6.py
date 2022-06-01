@@ -240,6 +240,5 @@ def main():
     log.stop_timer(f'Log completed with {numbgift} gifts created')
 
 
-
 if __name__ == '__main__':
     main()
