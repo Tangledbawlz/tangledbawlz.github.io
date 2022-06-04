@@ -97,35 +97,27 @@ class Factory(threading.Thread):
 
         # TODO wait until all of the factories are finished producing cars
         for x in range(self.cars_to_produce):
-            self.full_sem.acquire()
             car = Car()
-            self.q.put(car)
-            
+
 
             
 
         # TODO "Wake up/signal" the dealerships one more time.  Select one factory to do this
-           
-
+                
 
 
 class Dealer(threading.Thread):
     """ This is a dealer that receives cars """
 
-    def __init__(self, q, full_sem, empty_sem):
-        threading.Thread.__init__(self)
+    def __init__(self, q, car):
+        self.display()
         self.q = q
-        self.full_sem = full_sem
-        
-        
+        self.car = car
 
     def run(self):# TODO handle a car
         while True:
-            self.q.get()
-            self.full_sem.release()
-
+            # TODO handle a car
             if():
-                self.full_sem.acquire()
                 pass
 
             # Sleep a little - don't change.  This is the last line of the loop
@@ -139,8 +131,8 @@ def run_production(factory_count, dealer_count):
     """
 
     # TODO Create semaphore(s)
-    empty_sem = multiprocessing.Semaphore(10)
-    full_sem = multiprocessing.Semaphore(0)
+    empty_sem = multiprocessing.Semaphore()
+    full_sem = multiprocessing.Semaphore()
 
     # TODO Create queue
     car_queue = Queue251() #This is going to store the Cars objects (.append is thread safe)
@@ -157,33 +149,32 @@ def run_production(factory_count, dealer_count):
     # This is used to track the factory stats
     factory_stats = list([0] * factory_count)
 
+    # This is used to provide the car_max_queue
+    # car_queue = list([0] * MAX_QUEUE_SIZE)
+
     # TODO create your factories, each factory will create CARS_TO_CREATE_PER_FACTORY
-    factory = Factory(car_queue, full_sem, empty_sem)
-    dealer = Dealer(car_queue, full_sem, empty_sem)
+    factory = multiprocessing.Process(target=Dealer(), args=())
 
     # TODO create your dealerships
-    #dealers = [multiprocessing.Process(target=Factory(), args=()) for i in range(factory_count)]
+    dealers = multiprocessing.Process(target=Factory(), args=())
 
 
 
     log.start_timer()
 
     # TODO Start all dealerships
-    # for i in range(dealers.count):
-    #     i.start()
+    for i in range(dealers.count):
+        i.start()
 
     time.sleep(1)   # make sure all dealers have time to start
 
-    # # TODO Start all factories
-    factory.start()
-    dealer.start()
+    # TODO Start all factories
+    for i in range(factories.count):
+        i.start()
 
-    factory.join()
-    dealer.join()
-
-    # # TODO Wait for factories and dealerships to complete
-    # for i in range(dealers.count, factories.count):
-    #     i.join()
+    # TODO Wait for factories and dealerships to complete
+    for i in range(dealers.count, factories.count):
+        i.join()
 
     run_time = log.stop_timer(f'{sum(dealer_stats)} cars have been created')
 
