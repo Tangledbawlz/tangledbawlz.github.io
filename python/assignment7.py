@@ -64,6 +64,8 @@ def task_prime(value):
     if is_prime(value) == True:
         print(f"Value: {value} is prime")
         return result_primes.append(value)
+    else:
+        return result_primes.append(f"{value} is not Prime!")
         
 
 def task_word(word):
@@ -95,7 +97,9 @@ def task_sum(start_value, end_value):
     Add the following to the global list:
         sum of {start_value:,} to {end_value:,} = {total:,}
     """
-    sum =  start_value + end_value
+    sum = 0
+    for num in range(start_value, end_value + 1):
+        sum = sum + num
     return result_sums.append(sum)
 
 def task_name(url):
@@ -107,9 +111,11 @@ def task_name(url):
         {url} had an error receiving the information
     """
     #fetch data from URL
-    for i in range(1, 84):
-        url = [f"http://127.0.0.1:8790/people/{i}/"]
-        result_names.append(url)
+    # for i in range(1, 84):
+    url = [f"http://127.0.0.1:8790/people/2/"]
+    result_names.append(url)
+
+    
 
 def main():
     log = Log(show_terminal=True)
