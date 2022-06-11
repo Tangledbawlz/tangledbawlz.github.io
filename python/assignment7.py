@@ -6,8 +6,11 @@ Author: Norman Tangedal
 Purpose: Process Task Files
 Instructions:  See I-Learn
 TODO
-Add you comments here on the pool sizes that you used for your assignment and
-why they were the best choices.
+I created 5 pools to collect data. I believe that 5 would be perfect 
+for a few reasons, but the mostly because we have 5 different calls. 
+I thought it may be faster to add more, I remembered Amdahl's law,
+and I was able to calculate for my 12 core system, roughly 
+5 is accurate as well. Therefore, I'll stick to 5.
 """
 
 from datetime import datetime, timedelta
@@ -26,6 +29,7 @@ TYPE_WORD   = 'word'
 TYPE_UPPER  = 'upper'
 TYPE_SUM    = 'sum'
 TYPE_NAME   = 'name'
+
 
 # Global lists to collect the task results
 result_primes = []
@@ -58,8 +62,11 @@ def task_prime(value):
         {value} is not prime
     """
     if is_prime(value) == True:
-        result_primes.append(value)
-    
+        print(f"Value: {value} is prime")
+        return result_primes.append(value)
+    else:
+        return result_primes.append(f"{value} is not Prime!")
+        
 
 def task_word(word):
     """
@@ -72,8 +79,10 @@ def task_word(word):
     with open("words.txt", "r") as f:
         for data in f:
             data = f.readline()
-            if data == word:
-                result_words.append(word)
+            if word in data:
+                result_words.append(data)
+        return result_words
+            
             
 
 def task_upper(text):
@@ -81,15 +90,17 @@ def task_upper(text):
     Add the following to the global list:
         {text} ==>  uppercase version of {text}
     """
-
-    pass
+    return result_upper.append(text.upper())
 
 def task_sum(start_value, end_value):
     """
     Add the following to the global list:
         sum of {start_value:,} to {end_value:,} = {total:,}
     """
-    pass
+    sum = 0
+    for num in range(start_value, end_value + 1):
+        sum = sum + num
+    return result_sums.append(sum)
 
 def task_name(url):
     """
@@ -99,15 +110,39 @@ def task_name(url):
             - or -
         {url} had an error receiving the information
     """
+    #fetch data from URL
+    # for i in range(1, 84):
+    url = [f"http://127.0.0.1:8790/people/2/"]
+    result_names.append(url)
 
-    pass
-
+    
 
 def main():
     log = Log(show_terminal=True)
     log.start_timer()
 
     # TODO Create process pools
+    pool = mp.Pool(5)
+   
+    pool.apply_async(task_prime, args = (is_prime, ), callback = result_primes)
+    
+    # time.sleep(0.05)       # Do something - this is the main thread sleeping
+
+    pool.apply_async(task_word, callback = result_words)
+
+    # time.sleep(0.05)       # Do something
+
+    pool.apply_async(task_upper, callback = result_upper)
+
+    # time.sleep(1)       # Do something
+
+    pool.apply_async(task_sum, callback = result_sums)
+
+    # time.sleep(1)       # Do something
+
+    pool.apply_async(task_name, callback = result_names)
+
+    
 
     count = 0
     task_files = glob.glob("*.task")
@@ -132,11 +167,8 @@ def main():
             log.write(f'Error: unknown task type {task_type}')
 
     # TODO start and wait pools
-    poo1 = mp.Pool()
-    poo2 = mp.Pool()
-    poo3 = mp.Pool()
-    poo4 = mp.Pool()
-    poo5 = mp.Pool()
+    pool.close()
+    pool.join()
 
     # Do not change the following code (to the end of the main function)
     def log_list(lst, log):
