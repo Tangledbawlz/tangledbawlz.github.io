@@ -18,12 +18,15 @@ change the program to display the found path to the exit position.
 
 What would be your strategy?  
 
-What I tried doing was to use the global variable "Stop" to make all the strings stop the moment one of them reached the end. I 
+What I tried doing was to use the global variable "Stop" to make all the strings stop the moment one of them reached the end. I had a lot of trouble getting the 
+threads to work, instead the program hits every possible path on the maze and then returns to the starting position. I could change the program in the future to be able
+to use each thread to find the ends. I can also use the thread count to return how many threads were created, and hopefully end the program after finding the end.
 
 
 Why would it work?
 
-<Answer here>
+It could work because the threading class uses global variables to communicate between the threads. It would also return the number of threads used in the first place,
+and by using the "Stop," we would be able to stop the program.
 
 """
 import math
