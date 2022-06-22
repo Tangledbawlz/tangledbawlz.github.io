@@ -18,7 +18,7 @@ change the program to display the found path to the exit position.
 
 What would be your strategy?  
 
-<Answer here>
+What I tried doing was to use the global variable "Stop" to make all the strings stop the moment one of them reached the end. I 
 
 
 Why would it work?
@@ -76,7 +76,60 @@ def solve_find_end(maze):
     """ finds the end position using threads.  Nothing is returned """
     # When one of the threads finds the end position, stop all of them
 
-    pass
+    # create a variable for the path
+    path = []
+    threads = []
+    
+    # check to see if the spots are available and open 
+    # Find start position
+    position = maze.get_start_pos() 
+    # label x and y coordinates
+    x, y = position
+    # create x and y variables for the position
+    path.append(position)
+    
+    # if space is free, move here
+    if maze.can_move_here(x, y) and maze.get_possible_moves(x, y):
+        #move to next value in index 
+        maze.move(x, y, COLOR)
+        #recursive call to go through maze
+    def move_through():
+        nonlocal path
+        nonlocal maze
+        global stop
+        # t = threading.Thread(target=move_through(), args=())
+        # threads.append(t)
+        # for i in range(threads):
+        #     i.start()
+        
+        x, y = path[-1]
+        if maze.at_end(x,y):
+            return 
+        next_move = maze.get_possible_moves(x, y)
+        for possible in next_move:
+            new_color = get_color()
+            row, col = possible
+            if maze.can_move_here(row, col):
+                path.append(possible)
+                maze.move(row, col, new_color)
+                move_through()
+            if maze.at_end(row, col):
+                return maze.get_possible_moves(row, col)
+            if maze.get_possible_moves(row, col):
+                maze.can_move_here(row, col)
+                path.append(possible)
+                maze.move(row, col, new_color)
+                move_through()
+            if not maze.get_possible_moves(row, col):
+                maze.restore(row, col)
+            else:
+                return
+        
+    move_through()   
+    # for i in range(threads):
+    #         i.join()  
+    return path
+    
 
 
 def find_end(log, filename, delay):
