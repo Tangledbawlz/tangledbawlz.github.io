@@ -2,6 +2,12 @@
 Course: CSE 251
 Lesson Week: 11
 File: Assignment.py
+
+
+
+I think this was a B grade. I got most of it working, but forgot how to lock the race condition for the two methods. 
+I tried with a process manager and got many errors, and had less issues with thread locks instead, but then I was running into other problems. 
+Couldn't count cleaned rooms or parties, but mostly because of time constraint. 
 """
 import os
 import threading
