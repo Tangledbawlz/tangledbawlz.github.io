@@ -61,6 +61,7 @@ def guest_partying(id):
     time.sleep(random.uniform(0, 1))
 
 def cleaner():
+    global cleaned_count
     """
     do the following for TIME seconds
     cleaner will wait to try to clean the room (cleaner_waiting())
@@ -80,6 +81,8 @@ def cleaner():
             print(STARTING_CLEANING_MESSAGE)
             # Returns cleaner PID
             cleaner_cleaning(os.getpid())
+            # Increment the cleaned rooms counter
+            cleaned_count = cleaned_count + 1
             # Stop message
             print(STOPPING_CLEANING_MESSAGE)
             # Release lock
@@ -110,7 +113,7 @@ def guest():
             while(GUEST_LOCK.locked() and not CLEAN_LOCK.locked()):
                 guest_partying(os.getpid())
                 # Increment the global variable for party count
-                party_count += 1
+                party_count = party_count + 1
             # Closing party and turn off lights
             print(STOPPING_PARTY_MESSAGE)
             # unlock room
@@ -127,9 +130,14 @@ def main():
     # TODO - add any variables, data structures, processes you need
     
     for i in range(CLEANING_STAFF):
-        cleaning_process = mp.Process(target=cleaner)
+        cleaning_process = mp.Process(target=cleaner, args=())
         cleaning_process.start()
         cleaner_list.append(cleaning_process)
+    
+    for i in range(HOTEL_GUESTS):
+        guest_process = mp.Process(target=guest, args=())
+        guest_process.start()
+        guest_list.append(guest_process)
         
     time.sleep(TIME)
 
@@ -137,15 +145,10 @@ def main():
         cleaning_process.terminate()
     
 
-    for i in range(HOTEL_GUESTS):
-        guest_process = mp.Process(target=guest)
-        guest_process.start()
-        guest_list.append(guest_process)
-
-    time.sleep(TIME)
-
     for guest_process in guest_list:
         guest_process.terminate()
+    
+    time.sleep(TIME)
 
     # Results
     print(f'Room was cleaned {cleaned_count} times, there were {party_count} parties')
