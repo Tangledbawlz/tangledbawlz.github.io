@@ -14,7 +14,7 @@ CLEANING_STAFF = 2
 HOTEL_GUESTS = 15
 
 # Run program for this number of seconds
-TIME = 5
+TIME = 60
 
 STARTING_PARTY_MESSAGE =  '\nTurning on the lights for the party vvvvvvvvvvvvvv'
 STOPPING_PARTY_MESSAGE  = 'Turning off the lights  ^^^^^^^^^^^^^^^^^^^^^^^^^^\n'
