@@ -126,7 +126,7 @@ def solve_find_end(maze):
             if not maze.get_possible_moves(row, col):
                 maze.restore(row, col)
             else:
-                return
+                return True
         
     move_through()   
     # for i in range(threads):
