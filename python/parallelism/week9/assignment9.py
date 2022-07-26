@@ -2,37 +2,24 @@
 Course: CSE 251 
 Lesson Week: 09
 File: assignment09-p2.py 
-Author: Norman Tangedal
-
+Author: <Add name here>
 Purpose: Part 2 of assignment 09, finding the end position in the maze
-
 Instructions:
 - Do not create classes for this assignment, just functions
 - Do not use any other Python modules other than the ones included
 - Each thread requires a different color by calling get_color()
-
-
 This code is not interested in finding a path to the end position,
 However, once you have completed this program, describe how you could 
 change the program to display the found path to the exit position.
-
 What would be your strategy?  
-
-What I tried doing was to use the global variable "Stop" to make all the strings stop the moment one of them reached the end. I had a lot of trouble getting the 
-threads to work, instead the program hits every possible path on the maze and then returns to the starting position. I could change the program in the future to be able
-to use each thread to find the ends. I can also use the thread count to return how many threads were created, and hopefully end the program after finding the end.
-
-
+<Answer here>
 Why would it work?
-
-It could work because the threading class uses global variables to communicate between the threads. It would also return the number of threads used in the first place,
-and by using the "Stop," we would be able to stop the program.
-
+<Answer here>
 """
 import math
 import threading 
 from screen import Screen
-from maze import Maze
+from week9.maze import Maze
 import sys
 import cv2
 
@@ -79,60 +66,7 @@ def solve_find_end(maze):
     """ finds the end position using threads.  Nothing is returned """
     # When one of the threads finds the end position, stop all of them
 
-    # create a variable for the path
-    path = []
-    threads = []
-    
-    # check to see if the spots are available and open 
-    # Find start position
-    position = maze.get_start_pos() 
-    # label x and y coordinates
-    x, y = position
-    # create x and y variables for the position
-    path.append(position)
-    
-    # if space is free, move here
-    if maze.can_move_here(x, y) and maze.get_possible_moves(x, y):
-        #move to next value in index 
-        maze.move(x, y, COLOR)
-        #recursive call to go through maze
-    def move_through():
-        nonlocal path
-        nonlocal maze
-        global stop
-        # t = threading.Thread(target=move_through(), args=())
-        # threads.append(t)
-        # for i in range(threads):
-        #     i.start()
-        
-        x, y = path[-1]
-        if maze.at_end(x,y):
-            return 
-        next_move = maze.get_possible_moves(x, y)
-        for possible in next_move:
-            new_color = get_color()
-            row, col = possible
-            if maze.can_move_here(row, col):
-                path.append(possible)
-                maze.move(row, col, new_color)
-                move_through()
-            if maze.at_end(row, col):
-                return maze.get_possible_moves(row, col)
-            if maze.get_possible_moves(row, col):
-                maze.can_move_here(row, col)
-                path.append(possible)
-                maze.move(row, col, new_color)
-                move_through()
-            if not maze.get_possible_moves(row, col):
-                maze.restore(row, col)
-            else:
-                return True
-        
-    move_through()   
-    # for i in range(threads):
-    #         i.join()  
-    return path
-    
+    pass
 
 
 def find_end(log, filename, delay):

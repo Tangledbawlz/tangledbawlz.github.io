@@ -181,7 +181,7 @@ def breadth_fs_pedigree_limit5(family_id, tree):
     # recurse upwards for parents
     for parent in family_members[:2]: # Skip the children
         if parent.parents != None and tree.does_person_exist(parent.parents): # Check to see if parent parent exists and the parent parent is not in tree
-            with plock:
+            for i in range(5):
                 thread = threading.Thread(target=breadth_fs_pedigree_limit5, args=(parent.parents, tree))# for each child, add their families as well
                 threads.append(thread)
                 thread.start()
@@ -189,7 +189,7 @@ def breadth_fs_pedigree_limit5(family_id, tree):
     # recurse downwards for children
     for children in family_members[2:]: #skip the parents
         if children.family != None and tree.does_family_exist(children.family): # if the child has a family, and the family exists, we recurse into that family
-            with plock:
+            for i in range(5):
                 thread = threading.Thread(target=breadth_fs_pedigree_limit5, args=(children.family, tree))# for each child, add their families as well
                 threads.append(thread)
                 thread.start()

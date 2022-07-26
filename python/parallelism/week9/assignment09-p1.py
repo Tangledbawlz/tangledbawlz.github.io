@@ -2,15 +2,19 @@
 Course: CSE 251 
 Lesson Week: 09
 File: assignment09-p1.py 
-Author: <Add name here>
+Author: Norman Tangedal
+
 Purpose: Part 1 of assignment 09, finding a path to the end position in a maze
+
 Instructions:
 - Do not create classes for this assignment, just functions
 - Do not use any other Python modules other than the ones included
+
 """
 import math
+from pickle import TRUE
 from screen import Screen
-from maze import Maze
+from week9.maze import Maze
 import cv2
 import sys
 
@@ -22,13 +26,40 @@ COLOR = (0, 0, 255)
 
 
 # TODO add any functions
-
 def solve_path(maze):
     """ Solve the maze and return the path found between the start and end positions.  
         The path is a list of positions, (x, y) """
-        
-    # TODO start add code here
+
+    # TODO start add code here  
     path = []
+    #check to see if the spots are available and open 
+    position = maze.get_start_pos() 
+    x, y = position
+    path.append(position)
+    if maze.can_move_here(x, y) and maze.get_possible_moves(x, y):
+        #move to next value in index 
+        maze.move(x, y, COLOR)
+        #recursive call to go through maze
+    def move_through():
+        nonlocal path
+        nonlocal maze
+        x, y = path[-1]
+        if maze.at_end(x,y):
+            return 
+        next_move = maze.get_possible_moves(x, y)
+        for possible in next_move:
+            row, col = possible
+            if maze.can_move_here(row, col):
+                path.append(possible)
+                maze.move(row, col, COLOR)
+                move_through()
+            # this code would return to the starting point, but worked the closest to desired 
+            # if maze.at_end(row, col):
+            #     return maze.can_move_here(row, col)
+            else:
+                maze.restore(row, col)
+                return
+    move_through()     
     return path
 
 
@@ -61,7 +92,7 @@ def get_path(log, filename):
 
     return path
 
-
+#Display Maps
 def find_paths(log):
     """ Do not change this function """
 

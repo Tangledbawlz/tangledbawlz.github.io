@@ -5,7 +5,7 @@ def bit_str_parser(bit_str):
 
 # Echo server program
 import socket
-from battleship import BattleShip
+from other.battleship import BattleShip
 
 
 myBattleship = BattleShip()

@@ -21,7 +21,7 @@ Instructions:
 from imp import lock_held
 import math
 import threading 
-from cse251turtle import *
+from week1.cse251turtle import *
 
 # Include CSE 251 common Python files. 
 from cse251 import *
